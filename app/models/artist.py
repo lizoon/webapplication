@@ -1,4 +1,4 @@
-from app.app import *
+from app import *
 
 
 class Artist(Base):

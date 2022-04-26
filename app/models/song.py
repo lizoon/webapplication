@@ -1,4 +1,4 @@
-from app.app import *
+from app import *
 
 
 class Song(Base):
@@ -11,4 +11,4 @@ class Song(Base):
     album_id = Column(ForeignKey('albums.id'))
 
     album = relationship('Album')
-    users = relationship('User', secondary='users_songs')
+    users = relationship('User', secondary='users_songs') # secondary - attr for: users_songs connect to table
