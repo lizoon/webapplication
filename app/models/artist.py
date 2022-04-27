@@ -6,7 +6,7 @@ class Artist(Base):
 	__table_args__ = (UniqueConstraint('firstname', 'surname'),)
 
 	id = Column(Integer, primary_key=True, server_default=text("nextval('artists_id_seq'::regclass)"))
-	firstname = Column(Text, nullable=False)
-	surname = Column(Text)
+	firstname = Column(String(15), nullable=False)
+	surname = Column(String(15))
 
 	genres = relationship('Genre', secondary='artists_genres')

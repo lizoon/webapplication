@@ -5,7 +5,7 @@ class Album(Base):
     __tablename__ = 'albums'
 
     id = Column(Integer, primary_key=True, server_default=text("nextval('albums_id_seq'::regclass)"))
-    name = Column(Text, server_default=text("'New Album'::text"))
+    name = Column(String(15), server_default=text("'New Album'::text"))
     release_year = Column(Integer)
     artist_id = Column(ForeignKey('artists.id'))
 
