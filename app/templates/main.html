@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Головна сторінка додатку{% endblock %}
+{% block content %}
+    <h3><a href="{{ url_for('login') }}">Log in</a></h3>
+    <h3><a href="{{ url_for('signup') }}">Sign up</a></h3>
+    <h3><a>Admin</a></h3>
+
+{% endblock %}
