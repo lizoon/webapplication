@@ -1,0 +1,29 @@
+{% extends 'search.html' %}
+
+{% block title %}{{ genre }}{% endblock %}
+
+{% block head %}
+        <h1>{{ genre }}</h1>
+{% endblock %}
+
+
+{% block menu %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+        {% for artist in artists %}
+            <p>
+            {% if artist.surname == None %}
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" >
+                    {{ artist.firstname }}
+                </a>
+            {% else %}
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" >
+                    {{ artist.firstname}} {{ artist.surname }}
+                </a>
+            {% endif %}
+            </p>
+    {% endfor %}
+
+{% endblock %}

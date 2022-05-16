@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+<form method="post" action="/login" novalidate>
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.nickname) }}
+    {{ wtf.form_field(form.password) }}
+{#    {{ wtf.form_field(form.remember) }}#}
+    <p><input type="submit" value="увійти"></p>
+</form>
+{% endblock %}
+
+
+

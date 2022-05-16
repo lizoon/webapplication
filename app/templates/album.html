@@ -1,0 +1,48 @@
+{% extends 'search.html' %}
+
+{% block title %}{{ album }}{% endblock %}
+
+{% block head %}
+        <h1>{{ album }}</h1>
+{% endblock %}
+
+
+{% block menu %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table>
+    <tr>
+        <td>#</td>
+        <td>пісня</td>
+        <td>час</td>
+    </tr>
+        {% for song in songs %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ song.name }} </td>
+                <td>{{ song.duration }}</td>
+                <td>
+                    <a href="{{ url_for('song_add', song_id=song.id, prev='search') }}" class="btn btn-warning btn-xs">
+                        Like
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('song_delete', song_id=song.id, prev='search') }}" class="btn btn-warning">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

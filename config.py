@@ -4,3 +4,6 @@ class Configuration(object):
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://localhost:5432/laba"
     CSRF_ENABLED = True
     SECRET_KEY = 'you-will-never-guess'
+    FLASK_ADMIN_SWATCH = 'cerulean'
+    SECURITY_PASSWORD_SALT = 'secret_salt'
+

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ title }}{% endblock %}
+{% block menu %}
+    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
+    <p><a href="{{ url_for('search') }}">Шукати</a></p>
+    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
+    <p>Профіль</p>
+    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
+    <h3>
+    {% if current_user.has_role('admin') %}
+        <a href="/admin">Admin</a>
+    {% endif %}
+    </h3>
+{% endblock menu %}
+
+
+{% block content %}
+    <h4>profile</h4>
+    <h1>{{ user.nickname }}</h1>
+    <a>{{ count }} Пісень</a>
+
+    <p>
+        <a>Топ співаків</a> <a href="{{ url_for('artists') }}">відкрити усіх</a>
+    </p>
+        {% if func(flag) == [] %}
+            <p>Упс.. поки нічого немає</p>
+        {% else %}
+            <ol>
+            {% for artist in func(flag) %}
+            <p>
+            <li>
+                <a href="{{ url_for('artist', artist_id=artist.id) }}">
+                    {{ artist }}
+                </a>
+            </li>
+            </p>
+            {% endfor %}
+              </ol>
+        {% endif %}
+
+    <p>
+     <a1>Топ пісень</a1> <a href="{{ url_for('library') }}">відкрити усі</a>
+    </p>
+        {% if count == 0 %}
+            <p>Упс.. поки нічого не додано</p>
+
+        {% elif count < 4 %}
+            <table>
+                <tr>
+                    <td>#</td>
+                    <td>Пісня:</td>
+                    <td>Автор:</td>
+                    <td>Альбом:</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+            {% for i in range(count) %}
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ songs[i].name }}</td>
+                    <td>
+                        <a href="{{ url_for('album', album_id=songs[i].album_id) }}">
+                            {{ album.query.get(songs[i].album_id).name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('artist', artist_id=album.query.get(songs[i].album_id).artist_id) }}">
+                            {{ artist.query.filter(artist.id == album.query.get(songs[i].album_id).artist_id ).first() }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('song_delete', song_id=songs[i].id, prev='profile') }}" class="btn btn-warning">
+                            Delete
+                        </a>
+                    </td>
+                    <td>{{ songs[i].duration }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+
+
+        {% else %}
+            <table>
+                <tr>
+                    <td>#</td>
+                    <td>Пісня:</td>
+                    <td>Автор:</td>
+                    <td>Альбом:</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% for i in range(4) %}
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ songs[i].name }}</td>
+                    <td>
+                        <a href="{{ url_for('album', album_id=songs[i].album_id) }}">
+                            {{ album.query.get(songs[i].album_id).name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('artist', artist_id=album.query.get(songs[i].album_id).artist_id) }}">
+                            {{ artist.query.filter(artist.id == album.query.get(songs[i].album_id).artist_id ).first() }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('song_delete', song_id=songs[i].id, prev='profile') }}" class="btn btn-warning">
+                            Delete
+                        </a>
+                    </td>
+                    <td>{{ songs[i].duration }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+
+{% endblock %}

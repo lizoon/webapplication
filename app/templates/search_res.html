@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
+    <p>Шукати</p>
+    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
+    <p><a href="{{ url_for('profile') }}">Мій профіль</a></p>
+    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
+    <h3>
+        {% if current_user.has_role('admin') %}
+            <a href="/admin">Admin</a>
+        {% endif %}
+    </h3>
+{% endblock %}
+
+{% block content %}
+    <p>
+    {% if songs != [] %}
+        <h3>Пісні</h3>
+        <table>
+        <tr>
+            <td>пісня</td>
+            <td>автор</td>
+            <td>🕒</td>
+        </tr>
+        {% for song in songs %}
+            <tr>
+            <td>{{ song.name }}</td>
+            <td>
+                <a href="{{ url_for('artist', artist_id=album.query.get(song.album_id).artist_id) }}">
+                    {{ artist.query.filter(artist.id == album.query.get(song.album_id).artist_id ).first() }}
+                </a>
+            </td>
+            <td>{{ song.duration }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    </p>
+
+    <p>
+    {% if artists != [] %}
+        <h3>Артисти</h3>
+        {% for artist in artists %}
+            <p>
+            {% if artist.surname != None %}
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" >{{ artist.firstname }} {{ artist.surname }}</a>
+            {% else %}
+                <a href="{{ url_for('artist', artist_id=artist.id) }}">{{ artist.firstname }}</a>
+            {% endif %}
+            </p>
+        {% endfor %}
+    {% endif %}
+    </p>
+
+    <p>
+    {% if albums != [] %}
+        <h3>Альбоми</h3>
+        {% for album in albums %}
+            <p>
+                <a href="{{ url_for('album', album_id=album.id) }}">
+                    {{ album.name }}
+                </a>
+            </p>
+        {% endfor %}
+    {% endif %}
+    </p>
+
+{% endblock %}

@@ -1,3 +1,25 @@
-<h1>it is {{ name }} page</h1>
+{% extends 'base.html' %}
 
-<a href="{{ url_for('logout') }}">Logout</a>
+{% block head %}
+<h1>Привіт, {{ name }}</h1>
+{% endblock %}
+
+{% block menu %}
+<p>Домашня сторінка</p>
+<p><a href="{{ url_for('search') }}">Шукати</a></p>
+<p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
+
+<p><a href="{{ url_for('profile') }}">Профіль</a></p>
+<p><a href="{{ url_for('logout') }}">Вийти</a></p>
+<h3>
+    {% if current_user.has_role('admin') %}
+        <a href="/admin">Admin</a>
+    {% endif %}
+</h3>
+
+    <p><a href="{{ url_for('diagram') }}">Трошки статистики</a></p>
+{% endblock menu %}
+
+
+{% block content %}
+{% endblock %}

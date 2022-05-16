@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block menu %}
+    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
+    <p><a href="{{ url_for('search') }}">Шукати</a></p>
+    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
+    <p>Профіль</p>
+    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
+    <h3>
+    {% if current_user.has_role('admin') %}
+        <a href="/admin">Admin</a>
+    {% endif %}
+    </h3>
+{% endblock menu %}
+
+{% block content %}
+    <p>
+        <a>Топ співаків</a>
+    </p>
+        {% if func(flag) == [] %}
+            <p>Упс.. поки нічого немає</p>
+        {% else %}
+            <table>
+                {% for artist in func(flag) %}
+                    <p>
+                        <a href="{{ url_for('artist', artist_id=artist.id) }}">
+                            {{ artist }}
+                        </a>
+                    </p>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+
+{% endblock %}

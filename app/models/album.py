@@ -1,13 +1,13 @@
 from app import *
 
 
-class Album(Base):
+class Album(db.Model):
     __tablename__ = 'albums'
 
     id = Column(Integer, primary_key=True, server_default=text("nextval('albums_id_seq'::regclass)"))
-    name = Column(String(15), server_default=text("'New Album'::text"))
+    name = Column(String(20), server_default=text("'New Album'::text"))
     release_year = Column(Integer)
-    artist_id = Column(ForeignKey('artists.id'))
+    artist_id = Column(ForeignKey('artists.id', ondelete='CASCADE'), nullable=False)
 
     artist = relationship('Artist') # add attrs to models для доступа к данным, (name of responsible class for ONE relation)
 
@@ -17,4 +17,4 @@ class Album(Base):
         self.artist_id = artist_id
 
     def __repr__(self):
-        return f'{self.name} i am from {self.release_year}'
+        return f'{self.name}'

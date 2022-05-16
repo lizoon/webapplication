@@ -2,17 +2,14 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 
-{% block title %}Реєстрація{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-    <form method="post" action="/signup">
+    <form method="post" action="/signup" novalidate>
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.email) }}
         {{ wtf.form_field(form.nickname) }}
         {{ wtf.form_field(form.password) }}
-        <p>Choose gender:</p>
-        {{ wtf.form_field(form.gender) }}
-        {{ wtf.form_field(form.robot) }}
 
-    <p><input type="submit" value="submit"></p>
+    <p><input type="submit" value="підтвердити"></p>
 </form>
 {% endblock %}
