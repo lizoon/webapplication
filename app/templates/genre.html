@@ -1,25 +1,22 @@
-{% extends 'search.html' %}
+{% extends 'homepage.html' %}
 
 {% block title %}{{ genre }}{% endblock %}
 
 {% block head %}
-        <h1>{{ genre }}</h1>
-{% endblock %}
-
-
-{% block menu %}
     {{ super() }}
 {% endblock %}
 
+
 {% block content %}
+    <h3 class="titles" style="margin-top: 70px">{{ genre }}</h3>
         {% for artist in artists %}
             <p>
             {% if artist.surname == None %}
-                <a href="{{ url_for('artist', artist_id=artist.id) }}" >
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" class="titles text">
                     {{ artist.firstname }}
                 </a>
             {% else %}
-                <a href="{{ url_for('artist', artist_id=artist.id) }}" >
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" class="titles text">
                     {{ artist.firstname}} {{ artist.surname }}
                 </a>
             {% endif %}

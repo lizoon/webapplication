@@ -2,16 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#  <link rel="stylesheet" href="static/bootstrap.min.css" >#}
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="../static/css/forms.css" >
+    <link rel="stylesheet" href="../static/css/body.css" >
+    <style>
+    </style>
     <title>
         {% block title %}
             {{ title }}
         {% endblock %}
     </title>
+
 </head>
-<body>
-{% block head %}{% endblock %}
-{% block menu %}{% endblock %}
+<body class="body">
+{% block head %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand">Музична бібліотека</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Увійти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('signup') }}">Реєстрація</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    </nav>
+{% endblock %}
+
 {% block content %}{% endblock%}
 </body>
 </html>

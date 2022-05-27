@@ -6,8 +6,8 @@ from app.controllers.artist import *
 
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SelectField
-from wtforms.validators import InputRequired, Email, Length, Regexp, DataRequired, EqualTo
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Email, Length, Regexp
 
 
 class LoginForm(FlaskForm):
@@ -22,9 +22,8 @@ class LoginForm(FlaskForm):
 
 class SignUp(FlaskForm):
     email = StringField('Пошта',
-                        validators=[InputRequired(message='Пошта має бути заповнена!'),
-                                    Email(),
-                                    Length(max=30, message='Занадто довга поштова скринька!'),
+                        validators=[Length(max=30, message='Занадто довга поштова скринька!'),
+                                    Email(message='Пошта має бути заповнена!'),
                                     Regexp('^[a-z A-Z 0-9 ]+[\._]?[a-z 0-9]+[@]\w+[.]\w{2,3}$',
                                            message='Не валідний емейл!!'), ])
 
@@ -175,3 +174,4 @@ def diagram():
     return render_template('diagram.html',
                            title='diagram',
                            data1=data1)
+

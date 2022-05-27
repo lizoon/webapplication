@@ -1,18 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'homepage.html' %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block menu %}
-    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
-    <p><a href="{{ url_for('search') }}">Шукати</a></p>
-    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
-    <p><a href="{{ url_for('profile') }}">Мій профіль</a></p>
-    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
-    <h3>
-        {% if current_user.has_role('admin') %}
-            <a href="/admin">Admin</a>
-        {% endif %}
-    </h3>
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
@@ -34,17 +25,20 @@
             ]);
 
             var options1 = {
-                title: 'Мої жанри улюблених пісень',
-                is3D: true,
-            };
+                backgroundColor: '#ddd',
+                legend: { position: 'bottom' },
+                connectSteps: false,
+                colors: ['#4374E0', '#53A8FB', '#F1CA3A', '#E49307'],
+                isStacked: true,
+  };
 
-            var chart1 = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            var chart1 = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
             chart1.draw(data1, options1);
 
         }
     </script>
     </head>
     <body>
-    <div id="piechart_3d" style="width: 700px; height: 500px; margin-left: 500px;"></div>
+    <div id="chart_div" style="width: 700px; height: 500px; margin-left: 500px; margin-top: 100px;"></div>
     </body>
 {% endblock %}

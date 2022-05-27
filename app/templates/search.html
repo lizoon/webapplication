@@ -1,31 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'homepage.html' %}
 
 {% block title %}{{ title }}{% endblock %}
 
 
-{% block menu %}
-    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
-    <p>Шукати</p>
-    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
-    <p><a href="{{ url_for('profile') }}">Мій профіль</a></p>
-    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
-    <h3>
-        {% if current_user.has_role('admin') %}
-            <a href="/admin">Admin</a>
-        {% endif %}
-    </h3>
+{% block head %}
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
 
-    <form method="GET">
-        <input type="text" name="q" value="{{ request.args.get('q', '') }}" placeholder="пісня, артист, альбом">
-        <button type="submit">🔍</button>
+    <form method="GET" class="d-flex">
+        <input type="text" name="q" value="{{ request.args.get('q', '') }}" placeholder="пісня, артист, альбом"
+        class="form-control me-sm-2 search">
+        <button class="btn btn-secondary search_btn my-2 " type="submit">🔍</button>
     </form>
 
 
-    <p>Шукати жанри</p>
+    <p class="text-muted">Шукати жанри</p>
+    <ol class="breadcrumb">
     {% for genre in genres %}
-        <h4 align="center"><a href="{{ url_for('genre', genre_id=genre.id) }}">{{ genre.name }}</a></h4>
+            <li class="breadcrumb-item">
+                <a href="{{ url_for('genre', genre_id=genre.id) }}" class="text">{{ genre.name }}</a></li>
     {% endfor %}
+    </ol>
+
+
 {% endblock %}
+

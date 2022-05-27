@@ -1,4 +1,5 @@
-from flask import Flask, render_template, abort, redirect, url_for, request, session, flash
+from flask import Flask, render_template, \
+    abort, redirect, url_for, request, session, flash, Response
 
 from config import Configuration
 from flask_sqlalchemy import SQLAlchemy
@@ -65,11 +66,12 @@ from app.controllers import artist
 from app.controllers import genre
 from app.controllers import song
 from app.controllers import user
+from app.controllers import files
 
 
 @app.before_request
 def make_session_permanent():
     session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=25)
+    app.permanent_session_lifetime = timedelta(minutes=40)
 
 

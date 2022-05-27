@@ -1,24 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'homepage.html' %}
 
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block menu %}
-    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
-    <p><a href="{{ url_for('search') }}">Шукати</a></p>
-    <p>Моя бібліотека</p>
-    <p><a href="{{ url_for('profile') }}">Мій профіль</a></p>
-    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
-    <h3>
-        {% if current_user.has_role('admin') %}
-            <a href="/admin">Admin</a>
-        {% endif %}
-    </h3>
+{% block head %}
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
     <p>
-    <h3>Вподобані пісні❤️</h3>
+
+    <h3 class="titles"><b>Вподобані пісні</b>️</h3>
     </p>
 
     {% with messages = get_flashed_messages() %}
@@ -29,35 +21,32 @@
         {% endif %}
     {% endwith %}
 
-    <table>
-    <tr>
-        <td>#</td>
-        <td>назва</td>
-        <td>автор</td>
-        <td>альбом</td>
+    <table class="table table-hover">
+    <tr class="table-dark">
+      <th scope="row">#</th>
+        <td>Назва</td>
+        <td>Альбом</td>
+        <td>Автор</td>
         <td></td>
-        <td>time</td>
+        <td>🕓</td>
     </tr>
     {% for song in songs %}
-        <tr>
-        <td>{{ loop.index }}</td>
-        <td>Пісня: {{ song.name }} </td>
+        <tr class="table-dark">
+        <th>{{ loop.index }}</th>
+        <td>{{ song.name }} </td>
         <td>
-        <a href="{{ url_for('album', album_id=song.album_id) }}">
+        <a href="{{ url_for('album', album_id=song.album_id) }}" class="text">
             {{ album.query.get(song.album_id).name }}
         </a>
         </td>
         <td>
-            <a href="{{ url_for('artist', artist_id=album.query.get(song.album_id).artist_id) }}">
+            <a href="{{ url_for('artist', artist_id=album.query.get(song.album_id).artist_id) }}" class="text">
                 {{ artist.query.filter(artist.id == album.query.get(song.album_id).artist_id ).first() }}
             </a>
         </td>
         <td>
-            <a href="{{ url_for('song_add', song_id=song.id, prev='library') }}" class="btn btn-warning btn-xs">
-                Like
-            </a>
-            <a href="{{ url_for('song_delete', song_id=song.id, prev='library') }}" class="btn btn-warning">
-                Delete
+            <a href="{{ url_for('song_delete', song_id=song.id, prev='library') }}" class="btn btn-danger">
+                Видалити
             </a>
         <td>
             {{ song.duration }}

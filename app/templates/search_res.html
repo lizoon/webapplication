@@ -1,69 +1,91 @@
-{% extends 'base.html' %}
+{% extends 'homepage.html' %}
 
 {% block menu %}
-    <p><a href="{{ url_for('homepage') }}">Домашня сторінка</a></p>
-    <p>Шукати</p>
-    <p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
-    <p><a href="{{ url_for('profile') }}">Мій профіль</a></p>
-    <p><a href="{{ url_for('logout') }}">Вийти</a></p>
-    <h3>
-        {% if current_user.has_role('admin') %}
-            <a href="/admin">Admin</a>
-        {% endif %}
-    </h3>
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
-    <p>
     {% if songs != [] %}
-        <h3>Пісні</h3>
-        <table>
-        <tr>
-            <td>пісня</td>
-            <td>автор</td>
+        <h3 class="titles" style="margin-top: 70px">Пісні</h3>
+        <table class="table table-hover">
+        <tr class="table-dark titles">
+            <td>#</td>
+            <td>Назва</td>
+            <td>Автор</td>
+            <td></td>
+            <td></td>
             <td>🕒</td>
         </tr>
         {% for song in songs %}
-            <tr>
+            <tr class="table-dark titles">
+            <td>{{ loop.index }}</td>
             <td>{{ song.name }}</td>
             <td>
-                <a href="{{ url_for('artist', artist_id=album.query.get(song.album_id).artist_id) }}">
+                <a href="{{ url_for('artist', artist_id=album.query.get(song.album_id).artist_id) }}" class="text">
                     {{ artist.query.filter(artist.id == album.query.get(song.album_id).artist_id ).first() }}
                 </a>
             </td>
+                <td>
+                    <a href="{{ url_for('song_add', song_id=song.id, prev='search_res') }}" class="btn btn-secondary">
+                        Вподобати
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('song_delete', song_id=song.id, prev='search_res') }}" class="btn btn-danger">
+                        Видалити
+                    </a>
+                </td>
             <td>{{ song.duration }}</td>
             </tr>
         {% endfor %}
         </table>
     {% endif %}
-    </p>
 
-    <p>
     {% if artists != [] %}
-        <h3>Артисти</h3>
-        {% for artist in artists %}
-            <p>
+        <h3 class="titles" style="margin-top: 70px">Артисти</h3>
+        <table class="table table-hover">
+        <tr class="table-dark titles t">
+           <td class="t">#</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+       {% for artist in artists %}
+           <tr class="table-dark titles">
+               <td class="t">{{ loop.index }}</td>
+           <td>
             {% if artist.surname != None %}
-                <a href="{{ url_for('artist', artist_id=artist.id) }}" >{{ artist.firstname }} {{ artist.surname }}</a>
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" class="text" >{{ artist.firstname }} {{ artist.surname }}</a>
             {% else %}
-                <a href="{{ url_for('artist', artist_id=artist.id) }}">{{ artist.firstname }}</a>
+                <a href="{{ url_for('artist', artist_id=artist.id) }}" class="text">{{ artist.firstname }}</a>
             {% endif %}
-            </p>
+           </td>
+           <td></td>
+           <td></td>
+           </tr>
         {% endfor %}
+        </table>
     {% endif %}
-    </p>
 
-    <p>
+
     {% if albums != [] %}
-        <h3>Альбоми</h3>
+        <h3 class="titles" style="margin-top: 70px">Альбоми</h3>
+        <table class="table table-hover">
+        <tr class="table-dark titles">
+            <td class="t">#</td>
+            <td></td>
+        </tr>
         {% for album in albums %}
-            <p>
-                <a href="{{ url_for('album', album_id=album.id) }}">
+            <tr class="table-dark titles">
+            <td class="t">{{ loop.index }}</td>
+            <td>
+                <a href="{{ url_for('album', album_id=album.id) }}" class="text">
                     {{ album.name }}
                 </a>
-            </p>
+            </td>
+            </tr>
         {% endfor %}
+        </table>
     {% endif %}
-    </p>
 
 {% endblock %}

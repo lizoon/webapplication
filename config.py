@@ -6,4 +6,7 @@ class Configuration(object):
     SECRET_KEY = 'you-will-never-guess'
     FLASK_ADMIN_SWATCH = 'cerulean'
     SECURITY_PASSWORD_SALT = 'secret_salt'
-
+    DB_HOST = 'localhost'
+    DB_NAME = 'laba'
+    DB_USER = 'liza'
+    DB_PASS = 'liza'

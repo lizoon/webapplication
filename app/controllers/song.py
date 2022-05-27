@@ -14,9 +14,12 @@ def song_add(song_id, prev):
             flash('Така пісня вже додана')
             if prev == 'search':
                 return redirect(url_for('album', album_id=song.album_id))
+            elif prev == 'search_res':
+                return redirect(url_for('library'))
             else:
                 return redirect(url_for('library'))
 
+        flash('Пісня {0} додана!'.format(song.name))
         statement = t_users_songs.insert().values(user_id=current_user.id, song_id=song.id)
         db.session.execute(statement)
         db.session.commit()
@@ -40,11 +43,14 @@ def song_delete(song_id, prev):
             flash('Такої пісні немає!')
             if prev == 'search':
                 return redirect(url_for('album', album_id=song.album_id))
+            elif prev == 'search_res':
+                return redirect(url_for('library'))
             elif prev == 'profile':
                 return redirect(url_for('profile'))
             else:
                 return redirect(url_for('library'))
 
+        flash('Пісня {0} видалена!'.format(song.name))
         song.users.remove(current_user)
         db.session.commit()
 

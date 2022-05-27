@@ -1,25 +1,46 @@
 {% extends 'base.html' %}
 
+
 {% block head %}
-<h1>Привіт, {{ name }}</h1>
-{% endblock %}
-
-{% block menu %}
-<p>Домашня сторінка</p>
-<p><a href="{{ url_for('search') }}">Шукати</a></p>
-<p><a href="{{ url_for('library') }}">Моя бібліотека</a></p>
-
-<p><a href="{{ url_for('profile') }}">Профіль</a></p>
-<p><a href="{{ url_for('logout') }}">Вийти</a></p>
-<h3>
-    {% if current_user.has_role('admin') %}
-        <a href="/admin">Admin</a>
-    {% endif %}
-</h3>
-
-    <p><a href="{{ url_for('diagram') }}">Трошки статистики</a></p>
-{% endblock menu %}
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand">Музична бібліотека</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('homepage') }}">Домашня сторінка</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('search') }}">Шукати</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('library') }}">Моя бібліотека</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('profile') }}">Профіль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Вийти</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if current_user.has_role('admin') %}
+                            <a class="nav-link" href="/admin">Admin</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('diagram') }}">Трошки статистики</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    </nav>
+{% endblock head %}
 
 {% block content %}
+    <h2 class="titles up">Привіт, {{ name }}</h2>
+     {% if current_user.has_role('admin') %}
+        <a href="{{ url_for('export_excel') }}" class="btn btn-primary">Експорт файлу</a>
+        <a href="{{ url_for('import_excel') }}" class="btn btn-info">Імпорт файлу</a>
+    {% endif %}
+
 {% endblock %}

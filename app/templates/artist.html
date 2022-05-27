@@ -1,22 +1,23 @@
-{% extends 'search.html' %}
+{% extends 'homepage.html' %}
 
 {% block title %}{{ artist }}{% endblock %}
 
 {% block head %}
-        <h1>{{ artist }}</h1>
-{% endblock %}
-
-
-{% block menu %}
     {{ super() }}
 {% endblock %}
 
+
 {% block content %}
+    <h3 class="titles" style="margin-top: 70px">{{ artist }}</h3>
+    {% if albums != [] %}
         {% for album in albums %}
-            <p><a href="{{ url_for('album', album_id=album.id) }}">
+            <p><a href="{{ url_for('album', album_id=album.id) }}" class="text titles">
                 {{ album.name }}
             </a>
             </p>
         {% endfor %}
+    {% else %}
+        <p class="text-danger">Артист поки нічого не публікував :(</p>
+    {% endif %}
 
 {% endblock %}
