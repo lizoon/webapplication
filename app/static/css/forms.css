@@ -1,0 +1,72 @@
+.size_ {
+    display: block;
+    width: 800px;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+
+.btn {
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+.search {
+    width: 30%;
+    height: 60px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+.search_btn {
+    height: 60px;
+    padding-bottom: 4px;
+    margin-left: 1px;
+}
+
+.text-muted {
+    margin-top: 250px;
+    margin-left: 40px;
+}
+
+
+.breadcrumb {
+    margin-top: 80px;
+    margin-left: 300px;
+}
+
+.text {
+    text-decoration: none;
+}
+
+.btn-danger {
+    width: 90px;
+    padding-left: 7px;
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: 17px;
+    border-radius: 25px;
+}
+
+.btn-secondary {
+    width: 100px;
+    padding-left: 10px;
+    margin-top: 2px;
+    margin-left: 2px;
+    font-size: 17px;
+    border-radius: 25px;
+}
+
+.titles {
+    margin-left: 50px;
+}
+
+.up {
+    margin-top: 50px;
+}
+.text-muted {
+    text-decoration: none;
+}
+
+.t {
+    width: 80px;
+}
