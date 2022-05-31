@@ -67,6 +67,7 @@ from app.controllers import genre
 from app.controllers import song
 from app.controllers import user
 from app.controllers import files
+from app.controllers import queries
 
 
 @app.before_request
