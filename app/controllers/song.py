@@ -37,12 +37,14 @@ def song_delete(song_id, prev):
     song = db.session.query(Song).get(song_id)
 
     if song:
-        songs = db.session.query(Song).filter(Song.users.any(User.id == current_user.id))
+        songs = db.session.query(Song).\
+            filter(Song.users.any(User.id == current_user.id))
 
         if song not in songs:
             flash('Такої пісні немає!')
             if prev == 'search':
-                return redirect(url_for('album', album_id=song.album_id))
+                return redirect(url_for('album',
+                                        album_id=song.album_id))
             elif prev == 'search_res':
                 return redirect(url_for('library'))
             elif prev == 'profile':
@@ -55,7 +57,8 @@ def song_delete(song_id, prev):
         db.session.commit()
 
         if prev == 'search':
-            return redirect(url_for('album', album_id=song.album_id))
+            return redirect(url_for('album',
+                                    album_id=song.album_id))
         elif prev == 'profile':
             return redirect(url_for('profile'))
         else:

@@ -6,7 +6,7 @@ class Artist(db.Model):
 	__tablename__ = 'artists'
 	__table_args__ = (UniqueConstraint('firstname', 'surname'),)
 
-	id = Column(Integer, primary_key=True, server_default=text("nextval('artists_id_seq'::regclass)"))
+	id = Column(Integer, primary_key=True, server_default=text("nextval('artists_id_seq')"))
 	firstname = Column(String(25), nullable=False)
 	surname = Column(String(25))
 	genre_id = Column(ForeignKey('genres.id', ondelete='SET NULL'), nullable=False)
