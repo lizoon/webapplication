@@ -1,0 +1,103 @@
+{% extends 'homepage.html' %}
+
+{% block title %}Запити{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <h2 class="titles up">Запити</h2>
+    <h4 class="titles up">Прості</h4>
+    <ol class="titles up">
+    <li class="up">Запит 1</li>
+        <p class="text-success">Знайти усі назви альбомів артиста А</p>
+        <p class="text-secondary">Код артиста A:</p>
+
+        <form method="post" action="{{ url_for('show', id_='1') }}">
+            <select name="comp_select" class="t" >
+                {% for key in keys_artist %}
+                    <option value="{{ key }}">
+                        {{ key }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+
+    <li class="up">Запит 2</li>
+        <p class="text-success">Знайти користувачів, які слухають принаймні одну пісню артиста А</p>
+
+        <form method="post" action="{{ url_for('show', id_='2') }}">
+            <p class="text-secondary">Ім'я артиста:</p>
+            <input name="a_name" placeholder="Ім'я артиста">
+
+            <p class="text-secondary">Прізвище артиста:</p>
+            <input name="a_surname" placeholder="Прізвище артиста">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+
+
+    <li class="up">Запит 3</li>
+        <p class="text-success">Знайти артистів, яких слухають користувачі з ніком Н, емейлом Е</p>
+        <form method="post" action="{{ url_for('show', id_='3') }}">
+            <p class="text-secondary">Нік користувача Н:</p>
+            <input name="u_name" placeholder="Нік користувача">
+            <p class="text-secondary">Емейл користувача Е:</p>
+            <input name="u_email" placeholder="Емейл користувача">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+
+
+    <li class="up">Запит 4</li>
+        <p class="text-success">Знайти авторів, які співають не у жанрі Ж</p>
+        <form method="post" action="{{ url_for('show', id_='4') }}">
+            <p class="text-secondary">Ім'я жанру Ж:</p>
+            <input name="g_name" placeholder="Ім'я жанру">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+
+    <li class="up">Запит 5</li>
+        <p class="text-success">Знайти альбоми, кількість пісень у яких > числа N</p>
+        <form method="post" action="{{ url_for('show', id_='5') }}">
+            <p class="text-secondary">Число N:</p>
+            <input name="n" placeholder="Число N">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+    </ol>
+
+
+    <h4 class="titles up">Множинні</h4>
+    <ol class="titles up">
+        <li class="up">Запит 1</li>
+        <p class="text-success">Знайти нікнейми та емейли користувачів, які вподобали тих же авторів, що і користувач з ніком Н, імейлом Е</p>
+        <form method="post" action="{{ url_for('show_', id_='6') }}">
+            <p class="text-secondary">Нік користувача Н:</p>
+            <input name="u_name" placeholder="Нік користувача">
+            <p class="text-secondary">Емейл користувача Е:</p>
+            <input name="u_email" placeholder="Емейл користувача">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+        <li class="up">Запит 2</li>
+        <p class="text-success">Знайти нікнейми та імейли користувачів, які вподобали усіх наявних авторів, які випустили хоча б одну пісню</p>
+        <form method="post" action="{{ url_for('show_', id_='7') }}">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+
+        <li class="up">Запит 3</li>
+        <p class="text-success">Артистів, які випустили хоча б одну пісню з тою ж тривалістю, що і артист А</p>
+        <form method="post" action="{{ url_for('show_', id_='8') }}">
+            <p class="text-secondary">Ім'я артиста А:</p>
+            <input name="a_firstname" placeholder="Ім'я артиста">
+            <p class="text-secondary">Прізвище артита А:</p>
+            <input name="a_surname" placeholder="Прізвище артиста:">
+            <button type="submit" class="titles btn-success">Шукати</button>
+        </form>
+    </ol>
+
+
+{% endblock %}

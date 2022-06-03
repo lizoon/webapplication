@@ -1,0 +1,160 @@
+{% extends 'homepage.html' %}
+
+{% block title %}Запити{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+    <h3 class="titles up">Результат:</h3>
+    {% if id == '0' %}
+        <p class="text-danger titles up">Немає таких записів :(</p>
+    {% endif %}
+
+    {% if id == '1' %}
+        <table class="table table-hover x">
+        <tr>
+            <th>#</th>
+            <td>Назва альбому</td>
+        </tr>
+        {% for i in a_1 %}
+            <tr class="table-dark">
+                <th>{{ loop.index }}</th>
+                <td>{{ i }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+
+    {% if id== '2' %}
+        <table class="table table-hover x">
+        <tr>
+            <th>#</th>
+            <td>Ім'я користувача</td>
+        </tr>
+        {% for i in u_2 %}
+            <tr class="table-dark">
+                <th>{{ loop.index }}</th>
+                <td>{{ i }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+
+    {% if id== '3' %}
+        <table class="table table-hover x">
+        <tr>
+            <th>#</th>
+            <td>Ім'я артиста</td>
+        </tr>
+        {% for i in a_3 %}
+            <tr class="table-dark">
+                <th>{{ loop.index }}</th>
+                {% if i[1] %}
+                    <td>{{ i[0] }} {{ i[1] }}</td>
+                {% else %}
+                    <td>{{ i[0] }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+
+    {% if id== '4' %}
+        <table class="table table-hover x">
+        <tr>
+            <th>#</th>
+            <td>Ім'я артиста</td>
+        </tr>
+        {% for i in a_4 %}
+            <tr class="table-dark">
+                <th>{{ loop.index }}</th>
+                {% if i[1] %}
+                    <td>{{ i[0] }} {{ i[1] }}</td>
+                {% else %}
+                    <td>{{ i[0] }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+    {% if id == '5' %}
+        <table class="table table-hover x">
+        <tr>
+            <th>#</th>
+            <td>Назва альбому</td>
+        </tr>
+        {% for i in a_5 %}
+            <tr class="table-dark">
+                <th>{{ loop.index }}</th>
+                <td>{{ i }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+    {% if id == '6' %}
+        <table class="table table-hover x">
+        <tr>
+            <td>#</td>
+            <td>Нік користувача</td>
+            <td>Емейл користувача</td>
+        </tr>
+            {% for i in u_1 %}
+            <tr class="table-dark">
+                <td>{{ loop.index }}</td>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+    {% if id == '7' %}
+        <table class="table table-hover x">
+        <tr>
+            <td>Нік користувача</td>
+            <td>Емейл користувача</td>
+        </tr>
+            <tr class="table-dark">
+                <td>{{ u_2[0] }}</td>
+                <td>{{ u_2[1] }}</td>
+            </tr>
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+
+
+    {% if id == '8' %}
+        <table class="table table-hover x">
+        <tr>
+            <td>Ім'я артиста</td>
+            <td>Прізвище артиста</td>
+        </tr>
+            {% for i in a_3 %}
+            <tr class="table-dark">
+                {% if i[1] %}
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1] }}</td>
+                {% else %}
+                    <td>{{ i[0] }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('show', id_ = '0') }}" class="btn btn-success">Назад до запитів</a>
+    {% endif %}
+
+{% endblock %}
