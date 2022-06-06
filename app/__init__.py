@@ -18,8 +18,8 @@ from datetime import timedelta
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__, template_folder='templates')
-app.config.from_object(Configuration)
 
+app.config.from_object(Configuration)
 db = SQLAlchemy(app)
 
 
